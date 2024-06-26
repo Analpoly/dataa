@@ -50,7 +50,6 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 } catch (error) {
-                  // Handle error
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Login failed: ${error.toString()}")),
                   );
