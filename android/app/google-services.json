@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "577840064903",
+    "project_id": "enjoyy-b11e0",
+    "storage_bucket": "enjoyy-b11e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577840064903:android:523d16624efbf0cef14b22",
+        "android_client_info": {
+          "package_name": "com.example.dataa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAacZHknBydqRmLTHC43b_VCAI5nUJYNQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
