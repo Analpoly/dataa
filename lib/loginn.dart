@@ -44,14 +44,17 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 try {
                   await Provider.of<AuthProvider>(context, listen: false)
-                      .signIn(emailController.text, passwordController.text, keepLoggedIn: keepLoggedIn);
-                  Navigator.pushReplacement(
+                      .signIn(emailController.text, passwordController.text,
+                          keepLoggedIn: keepLoggedIn);
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => HomePage()),
+                    (route) => false,
                   );
                 } catch (error) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Login failed: ${error.toString()}")),
+                    SnackBar(
+                        content: Text("Login failed: ${error.toString()}")),
                   );
                 }
               },

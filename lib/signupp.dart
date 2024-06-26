@@ -7,7 +7,8 @@ import 'auth_provider.dart';
 class SignupPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class SignupPage extends StatelessWidget {
       appBar: AppBar(title: Text("Sign Up")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child:ListView(
+        child: ListView(
           children: [
             TextField(
               controller: emailController,
@@ -43,13 +44,15 @@ class SignupPage extends StatelessWidget {
                 try {
                   await Provider.of<AuthProvider>(context, listen: false)
                       .signUp(emailController.text, passwordController.text);
-                  Navigator.pushReplacement(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => HomePage()),
+                    (route) => false,
                   );
                 } catch (error) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Signup failed: ${error.toString()}")),
+                    SnackBar(
+                        content: Text("Signup failed: ${error.toString()}")),
                   );
                 }
               },
@@ -57,7 +60,7 @@ class SignupPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pop(context); 
+                Navigator.pop(context);
               },
               child: Text("Already have an account? Login"),
             )

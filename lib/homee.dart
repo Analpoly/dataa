@@ -18,10 +18,13 @@ class HomePage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()),
-              result: Provider.of<AuthProvider>(context, listen: false).signOut());
+              Provider.of<AuthProvider>(context, listen: false).signOut();
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+                (route) => false,
+              );
             },
-          
           ),
         ],
       ),
@@ -38,13 +41,15 @@ class HomePage extends StatelessWidget {
               itemCount: categories?.length,
               itemBuilder: (context, index) {
                 Category category = categories![index];
-                String imageUrl = "https://coinoneglobal.in/crm/${category.imgUrlPath}";
+                String imageUrl =
+                    "https://coinoneglobal.in/crm/${category.imgUrlPath}";
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SecondPage(categoryId: category.id),
+                        builder: (context) =>
+                            SecondPage(categoryId: category.id),
                       ),
                     );
                   },
@@ -53,8 +58,10 @@ class HomePage extends StatelessWidget {
                       children: [
                         CachedNetworkImage(
                           imageUrl: imageUrl,
-                          placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                         Text(category.name),
                       ],
@@ -71,7 +78,8 @@ class HomePage extends StatelessWidget {
 
   Future<List<Category>> fetchCategories() async {
     final response = await http.get(
-      Uri.parse('https://coinoneglobal.in/teresa_trial/webtemplate.asmx/FnGetTemplateCategoryList?PrmCmpId=1&PrmBrId=2'),
+      Uri.parse(
+          'https://coinoneglobal.in/teresa_trial/webtemplate.asmx/FnGetTemplateCategoryList?PrmCmpId=1&PrmBrId=2'),
     );
 
     if (response.statusCode == 200) {
@@ -82,4 +90,3 @@ class HomePage extends StatelessWidget {
     }
   }
 }
-
